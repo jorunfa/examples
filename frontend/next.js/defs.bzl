@@ -172,13 +172,13 @@ def next(
         **kwargs
     )
 
-    # `next export` runs the application in production mode
+    # `next build` builds the application in production mode, to static files
     # https://nextjs.org/docs/api-reference/cli#production
     js_run_binary(
         name = "{}_export".format(name),
         tool = next_js_binary,
-        args = ["export"],
-        srcs = data + [name],
+        args = ["build"],
+        srcs = srcs + data,
         out_dirs = [next_export_out],
         chdir = native.package_name(),
         # Tagged as "manual" since this `next export` writes back to the `.next` directory which causes issues with
